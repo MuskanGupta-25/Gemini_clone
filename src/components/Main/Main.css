@@ -196,7 +196,7 @@
 }
 
 @media(max-width:400px){
-    .main-bottom{
+    .search-box{
         margin-top: 250px;
     }
     .main-bottom input{
