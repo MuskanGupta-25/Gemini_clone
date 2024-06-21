@@ -199,9 +199,11 @@
     
     .search-box {        
         padding: 5px 5px;
-        margin-bottom: -10px;
     }
-
+    .main .bottom-info{
+        font-size: 10px;
+        margin-bottom: -30px;        
+    }
     .main-bottom input{
         flex: none;
         width: 130px;
