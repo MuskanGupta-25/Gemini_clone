@@ -197,6 +197,7 @@
 
 @media(max-width:400px){
     .main-bottom input{
+        margin-top: 10px;
         flex: none;
         width: 120px;
     }
