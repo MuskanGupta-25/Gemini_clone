@@ -210,7 +210,6 @@
         gap:2px
     }
     .main-bottom{
-        margin-top: auto;
-        padding: 10px;
+        margin: auto;
     }
 }
