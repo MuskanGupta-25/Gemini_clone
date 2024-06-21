@@ -197,7 +197,6 @@
 
 @media(max-width:400px){
     .main-bottom input{
-        margin-top: 10px;
         flex: none;
         width: 120px;
     }
@@ -209,5 +208,8 @@
     }
     .search-box div{
         gap:2px
+    }
+    .main-bottom{
+        margin-top: 30px;
     }
 }
