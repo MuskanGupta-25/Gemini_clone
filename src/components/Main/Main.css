@@ -194,3 +194,19 @@
         gap:5px
     }
 }
+
+@media(max-width:400px){
+    .main-bottom input{
+        flex: none;
+        width: 120px;
+    }
+    .main-bottom img{
+        width: 15px;
+    }
+    .search-box{
+        padding: 3px 5px;
+    }
+    .search-box div{
+        gap:2px
+    }
+}
