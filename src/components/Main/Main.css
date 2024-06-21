@@ -196,13 +196,16 @@
 }
 
 @media(max-width:400px){
-    
+    .main{
+    min-height: 150vh;
+
+    }
     .search-box {        
         padding: 5px 5px;
     }
     .main .bottom-info{
         font-size: 10px;
-        margin-bottom: -30px;        
+        margin-bottom: -5px;        
     }
     .main-bottom input{
         flex: none;
