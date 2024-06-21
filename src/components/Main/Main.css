@@ -209,7 +209,8 @@
     .search-box div{
         gap:2px
     }
-    .main-bottom{
-        margin: auto;
+    .main .card{
+        height: 150px;
+        margin-bottom: 20px;
     }
 }
