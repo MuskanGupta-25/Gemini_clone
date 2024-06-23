@@ -1,7 +1,8 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const db = require('../config/db.config');
+const runChat = require("../utils/helper")
 exports.register = async (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: 'Content can not be empty!' });
@@ -59,21 +60,21 @@ exports.login = (req, res) => {
     });
 };
 
-exports.storePrompt = (req, res) => {
-    const userId = req.userId; // assuming this is set by auth middleware
-    const { prompt, response } = req.body;
-
-    if (!prompt || !response) {
-        res.status(400).send({ message: 'Prompt and response are required!' });
+exports.storePrompt = async (req, res) => {
+    // const userId = req.userId; // assuming this is set by auth middleware
+    const {prompt} = req.body;
+    if (!prompt) {
+        res.status(400).send({ message: 'Prompt are required!' });
         return;
     }
-
-    const query = 'INSERT INTO prompts (user_id, prompt, response) VALUES (?, ?, ?)';
-    db.query(query, [userId, prompt, response], (err, result) => {
+    console.log("in here");
+    const promptResponse = await runChat(prompt);
+    const query = 'INSERT INTO user_history (userId, prompt, response) VALUES (?, ?, ?)';
+    db.query(query, [0, prompt, promptResponse], (err, result) => {
         if (err) {
             res.status(500).send({ message: err.message || 'Error storing prompt and response.' });
             return;
         }
-        res.send({ id: result.insertId, userId, prompt, response });
+        res.send({ id: result.insertId, userId:'0', prompt, promptResponse });
     });
 };

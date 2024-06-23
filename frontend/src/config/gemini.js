@@ -1,60 +1,33 @@
 
-/*
- * Install the Generative AI SDK
- *
- * $ npm install @google/generative-ai
- *
- * See the getting started guide for more information
- * https://ai.google.dev/gemini-api/docs/get-started/node
- */
- import {
-    GoogleGenerativeAI,
-    HarmCategory,
-    HarmBlockThreshold,
-  } from "@google/generative-ai"; 
-
-  const Model_Name = "gemini-1.5-pro";
-  const API_KEY = "AIzaSyApLnLYkdrfNeE2d19qKMDa1SDZl31fNfY"
   
-  async function runChat(prompt){
-    const genAI = new GoogleGenerativeAI(API_KEY);
-    const model = genAI.getGenerativeModel({model:Model_Name});
-   
-    const generationConfig = {
-        temperature: 1,
-    topP: 0.95,
-    topK: 64,
-    maxOutputTokens: 8192,
-    };
-
-    const safetySettings=[
-        {
-            category : HarmCategory.HARM_CATEGORY_HARASSMENT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+  async function runChat(prompt) {
+    const url = 'http://localhost:8080/api/users/prompt';
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // Add any other headers as needed
         },
-        {
-            category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-            category : HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-            category : HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-    ];
-    const chat = model.startChat({
-        generationConfig,
-        safetySettings,
-        history:[],
-    });
-    const result = await chat.sendMessage(prompt);
-    const response = result.response;
-    console.log(response.text());
-    return response.text();
+        body: JSON.stringify({ prompt: prompt })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const data = await response.json();
+      console.log("data:",data);
+      console.log('Response from backend:', data.response);
+      // Handle the response data as needed
+      return data.promptResponse;
+    } catch (error) {
+      console.error('Error sending request to backend:', error);
+      // Handle errors here
+    }
   }
+  
  export default runChat;
 //   const apiKey = process.env.GEMINI_API_KEY;
 //   const genAI = new GoogleGenerativeAI(apiKey);

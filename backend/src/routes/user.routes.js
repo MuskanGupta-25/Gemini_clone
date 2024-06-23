@@ -1,4 +1,3 @@
-const { verifyToken } = require('../middleware/auth.middleware');
 
 module.exports = app => {
     const users = require('../controllers/user.controller');
@@ -6,7 +5,7 @@ module.exports = app => {
 
     router.post('/register', users.register);
     router.post('/login', users.login);
-    router.post('/prompt', verifyToken, users.storePrompt);
+    router.post('/prompt',users.storePrompt);
 
     app.use('/api/users', router);
 };
