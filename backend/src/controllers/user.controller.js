@@ -62,12 +62,11 @@ exports.login = (req, res) => {
 
 exports.storePrompt = async (req, res) => {
     // const userId = req.userId; // assuming this is set by auth middleware
-    const {prompt} = req.body;
+    const { prompt } = req.body;
     if (!prompt) {
         res.status(400).send({ message: 'Prompt are required!' });
         return;
     }
-    console.log("in here");
     const promptResponse = await runChat(prompt);
     const query = 'INSERT INTO user_history (userId, prompt, response) VALUES (?, ?, ?)';
     db.query(query, [0, prompt, promptResponse], (err, result) => {
@@ -75,6 +74,38 @@ exports.storePrompt = async (req, res) => {
             res.status(500).send({ message: err.message || 'Error storing prompt and response.' });
             return;
         }
-        res.send({ id: result.insertId, userId:'0', prompt, promptResponse });
+        res.send({ id: result.insertId, userId: '0', prompt, promptResponse });
     });
 };
+
+exports.getPromptHistory = async (req, res) => {
+    const {userId} = req.body;
+    const query = 'SELECT * FROM user_history WHERE userId = ?';
+  
+    db.query(query, [userId], (err, results) => {
+      if (err) {
+        console.error('Error executing query:', err);
+        res.status(500).json({ error: 'Internal server error' });
+        return;
+      }
+  
+      // Send the results back as JSON
+      res.send({ data: results });
+    });
+}
+
+exports.getUserName = async (req, res) => {
+    const {userId} = req.body;
+    const query = 'SELECT * FROM user WHERE Id = ?';
+  
+    db.query(query, [userId], (err, results) => {
+      if (err) {
+        console.error('Error executing query:', err);
+        res.status(500).json({ error: 'Internal server error' });
+        return;
+      }
+  
+      // Send the results back as JSON
+      res.send({ data: results });
+    });
+}
