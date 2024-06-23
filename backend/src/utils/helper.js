@@ -7,29 +7,29 @@
  * See the getting started guide for more information
  * https://ai.google.dev/gemini-api/docs/get-started/node
  */
- import {
+const {
     GoogleGenerativeAI,
     HarmCategory,
     HarmBlockThreshold,
-  } from "@google/generative-ai"; 
+} = require("@google/generative-ai") ;
 
-  const Model_Name = "gemini-1.5-pro";
-  const API_KEY = "AIzaSyApLnLYkdrfNeE2d19qKMDa1SDZl31fNfY"
-  
-  async function runChat(prompt){
+const Model_Name = "gemini-1.5-pro";
+const API_KEY = 'AIzaSyApLnLYkdrfNeE2d19qKMDa1SDZl31fNfY';
+
+ async function runChat(prompt){
     const genAI = new GoogleGenerativeAI(API_KEY);
-    const model = genAI.getGenerativeModel({model:Model_Name});
-   
+    const model = genAI.getGenerativeModel({ model: Model_Name });
+
     const generationConfig = {
         temperature: 1,
-    topP: 0.95,
-    topK: 64,
-    maxOutputTokens: 8192,
+        topP: 0.95,
+        topK: 64,
+        maxOutputTokens: 8192,
     };
 
-    const safetySettings=[
+    const safetySettings = [
         {
-            category : HarmCategory.HARM_CATEGORY_HARASSMENT,
+            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
             threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
         },
         {
@@ -37,32 +37,33 @@
             threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
         },
         {
-            category : HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+            category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
             threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
         },
         {
-            category : HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
             threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
         },
     ];
     const chat = model.startChat({
         generationConfig,
         safetySettings,
-        history:[],
+        history: [],
     });
     const result = await chat.sendMessage(prompt);
     const response = result.response;
-    console.log(response.text());
+    
     return response.text();
-  }
- export default runChat;
+}
+
+module.exports = runChat
 //   const apiKey = process.env.GEMINI_API_KEY;
 //   const genAI = new GoogleGenerativeAI(apiKey);
-  
+
 //   const model = genAI.getGenerativeModel({
 //     model: "gemini-1.5-pro",
 //   });
-  
+
 //   const generationConfig = {
 //     temperature: 1,
 //     topP: 0.95,
@@ -70,7 +71,7 @@
 //     maxOutputTokens: 8192,
 //     responseMimeType: "text/plain",
 //   };
-  
+
 //   async function run() {
 //     const chatSession = model.startChat({
 //       generationConfig,
@@ -79,9 +80,9 @@
 //       history: [
 //       ],
 //     });
-  
+
 //     const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
 //     console.log(result.response.text());
 //   }
-  
+
 //   run();

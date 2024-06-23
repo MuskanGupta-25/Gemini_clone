@@ -52,8 +52,8 @@
 //     }
 //     setLoading(false)
 //     setInput("")
-    
-  
+
+
 //   };
 
 //   const contextValue = {
@@ -97,7 +97,7 @@ const ContextProvider = (props) => {
     }, 75 * index);
   };
 
-  const newChat = ()=>{
+  const newChat = () => {
     setLoading(false)
     setShowResult(false)
   }
@@ -118,19 +118,20 @@ const ContextProvider = (props) => {
 
   const onSent = async (prompt) => {
     setResultData("");
+    setInput("");
     setLoading(true);
     setShowResult(true);
     let response;
-    if(prompt!==undefined){
-      response=await runChat(prompt);
+    if (prompt !== undefined) {
+      response = await runChat(prompt);
       setRecentPrompt(prompt)
     }
-    else{
-      setPrevPrompts(prev=>[...prev,input])
+    else {
+      setPrevPrompts(prev => [...prev, input])
       setRecentPrompt(input)
       response = await runChat(input)
     }
-    
+
     // Clean the response
     const cleanedResponse = cleanResponse(response);
 
@@ -142,9 +143,61 @@ const ContextProvider = (props) => {
     }
 
     setLoading(false);
-    setInput("");
+    
   };
 
+  const fetchUserPrompts = async() => {
+      const url = 'http://localhost:8080/api/users/promptHistory';
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+            // Add any other headers as needed
+          },
+          body: JSON.stringify({ userId: 1 })
+        });
+    
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+    
+        const data = await response.json();
+        // Handle the response data as needed
+        return data.data;
+      } catch (error) {
+        console.error('Error sending request to backend:', error);
+        // Handle errors here
+      }
+  }
+
+  const fetchUserName = async() => {
+    const url = 'http://localhost:8080/api/users/getUserName';
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // Add any other headers as needed
+        },
+        body: JSON.stringify({ userId: 1 })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const data = await response.json();
+      console.log("data:",data);
+      console.log('Response from backend:', data.data);
+      // Handle the response data as needed
+      return data.data[0];
+    } catch (error) {
+      console.error('Error sending request to backend:', error);
+      // Handle errors here
+    }
+}
+  
   const contextValue = {
     prevPrompts,
     setPrevPrompts,
@@ -156,7 +209,9 @@ const ContextProvider = (props) => {
     resultData,
     input,
     setInput,
-    newChat
+    newChat,
+    fetchUserPrompts,
+    fetchUserName
   };
 
   return (
