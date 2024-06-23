@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { assets } from '../../../assets/assets'
 export const Suggestion = ({ userHistoryPrompts }) => {
   return (
-    <div className="cards">
+    <div className="cards-container">
       {userHistoryPrompts && userHistoryPrompts.map((item, index) => (
         <>
           {index < 4 && (
