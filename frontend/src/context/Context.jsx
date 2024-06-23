@@ -52,8 +52,8 @@
 //     }
 //     setLoading(false)
 //     setInput("")
-    
-  
+
+
 //   };
 
 //   const contextValue = {
@@ -97,7 +97,7 @@ const ContextProvider = (props) => {
     }, 75 * index);
   };
 
-  const newChat = ()=>{
+  const newChat = () => {
     setLoading(false)
     setShowResult(false)
   }
@@ -121,16 +121,16 @@ const ContextProvider = (props) => {
     setLoading(true);
     setShowResult(true);
     let response;
-    if(prompt!==undefined){
-      response=await runChat(prompt);
+    if (prompt !== undefined) {
+      response = await runChat(prompt);
       setRecentPrompt(prompt)
     }
-    else{
-      setPrevPrompts(prev=>[...prev,input])
+    else {
+      setPrevPrompts(prev => [...prev, input])
       setRecentPrompt(input)
       response = await runChat(input)
     }
-    
+
     // Clean the response
     const cleanedResponse = cleanResponse(response);
 
