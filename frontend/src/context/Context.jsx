@@ -78,7 +78,7 @@
 
 // export default ContextProvider;
 
-import { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import runChat from "../config/gemini";
 
 export const Context = createContext();

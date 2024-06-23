@@ -1,26 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: Outfit;
-}
-
-#root{
-  min-height: 100vh;
-  display: flex;
-  animation: fadeIn 1.5s;
-}
-
-@keyframes fadeIn{
-  0%{
-    opacity: 0;
-  }
-  100%{
-    opacity: 1;
-  }
-}
 .main{
   flex: 1;
   min-height: 100vh;
@@ -37,7 +14,7 @@
   color: #585858;
 }
 
-.main .nav img{
+.main img{
   width: 40px;
   border-radius: 50px;
 }
@@ -47,7 +24,7 @@
   margin: auto;
 }
 
-.main .greet{
+.greet{
   margin: 50px 0px;
   font-size: 56px;
   color: #c4c7c5;
@@ -55,20 +32,20 @@
   padding: 20px;
 }
 
-.main .greet span{
+.greet span{
   background: -webkit-linear-gradient(16deg,#4b90ff,#ff5546);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.main .cards{
+ .cards{
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
   gap: 15px;
   padding: 20px;
 }
 
-.main .card{
+.card{
   height: 200px;
   padding: 15px;
   background-color: #f0f4f9;
@@ -77,7 +54,7 @@
   cursor: pointer;
 }
 
-.main .card img{
+.card img{
   width: 35px;
   padding: 5px;
   position: absolute;
@@ -87,16 +64,16 @@
   right: 10px;
 }
 
-.main .card p{
+.card p{
   color: #585858;
   font-size: 17px;
 }
 
-.main .card:hover{
+.card:hover{
   background-color: #dfe4ea;
 }
 
-.main-bottom{
+.main .main-bottom{
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -135,7 +112,7 @@
   gap: 15px;
 }
 
-.main .bottom-info{
+.bottom-info{
   font-size: 13px;
   margin: 15px auto;
   text-align: center;
@@ -226,7 +203,7 @@
   .search-box {        
       padding: 5px 5px;
   }
-  .main .bottom-info{
+  .bottom-info{
       font-size: 10px;
       margin-bottom: -5px;        
   }
@@ -240,7 +217,7 @@
   .search-box div{
       gap:2px
   }
-  .main .card{
+  .card{
       height: 150px;       
       margin-bottom: 20px;
   }
