@@ -35,10 +35,10 @@ const Main = () => {
                     {userName && (
                         <Greeting userName={userName} />
                     )}
-                    {userHistoryPrompts && (
-                        <Suggestion userHistoryPrompts={userHistoryPrompts} />
+                    {/* {userHistoryPrompts && (
+                        // <Suggestion userHistoryPrompts={userHistoryPrompts} />
 
-                    )}
+                    )} */}
                 </> :
                     <ResultTab recentPrompt={recentPrompt} loading={loading} resultData={resultData} />
                 }
