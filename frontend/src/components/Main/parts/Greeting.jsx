@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import './partStyle.css'
 export const Greeting = ({userName}) => {
   return (
     <div className="greet">

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './partStyle.css';
 import { assets } from '../../../assets/assets'
 export const Suggestion = ({ userHistoryPrompts }) => {
   return (
@@ -16,3 +17,6 @@ export const Suggestion = ({ userHistoryPrompts }) => {
     </div>
   )
 }
+
+
+
