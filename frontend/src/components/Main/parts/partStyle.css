@@ -14,9 +14,14 @@
   color: #585858;
 }
 
-.main img{
+.user{
   width: 40px;
   border-radius: 50px;
+
+}
+
+.nav img{
+  cursor: pointer;
 }
 
 .main-container{
